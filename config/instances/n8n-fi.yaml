@@ -12,8 +12,8 @@ redis:
 taskRunners:
   enabled: true
   image:
-    repository: ghcr.io/fakhry000/n8n-fi-task-runner:2.15.0
-    tag: 2.15.0
+    repository: ghcr.io/fakhry000/n8n-fi-task-runner
+    tag: "2.15.0"
     pullPolicy: IfNotPresent
   authToken:
     existingSecret: n8n-task-runner-secret
