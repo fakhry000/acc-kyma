@@ -12,7 +12,7 @@ redis:
 taskRunners:
   enabled: true
   image:
-    repository: ghcr.io/<YOUR_ORG>/n8n-hr-task-runner
+    repository: ghcr.io/fakhry000/n8n-hr-task-runner:2.15.0
     tag: 2.15.0
     pullPolicy: IfNotPresent
   authToken:
