@@ -1,4 +1,3 @@
-ARG BASE_IMAGE=docker.n8n.io/n8nio/runners:2.15.0
 FROM n8nio/runners:latest
 USER root
 RUN python -m pip install --no-cache-dir --upgrade pip
