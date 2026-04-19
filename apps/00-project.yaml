@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: n8n-platform
+  namespace: argocd
+spec:
+  description: n8n on Kyma GitOps project
+  sourceRepos:
+    - https://github.com/fakhry000/acc-kyma.git
+    - https://github.com/n8n-io/n8n-hosting.git
+  destinations:
+    - namespace: argocd
+      server: https://kubernetes.default.svc
+    - namespace: n8n-hr
+      server: https://kubernetes.default.svc
+    - namespace: n8n-fi
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'

@@ -1,0 +1,16 @@
+apiVersion: gateway.kyma-project.io/v2
+kind: APIRule
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  hosts:
+    - argocd.<YOUR_KYMA_DOMAIN>
+  service:
+    name: argocd-server
+    port: 80
+  gateway: kyma-system/kyma-gateway
+  rules:
+    - path: /*
+      methods: [GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS]
+      noAuth: true

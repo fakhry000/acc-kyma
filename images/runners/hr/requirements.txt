@@ -1,0 +1,15 @@
+pandas
+numpy
+requests
+openpyxl
+xlrd
+python-dateutil
+pytz
+pyyaml
+lxml
+beautifulsoup4
+pypdf
+pdfplumber
+boto3
+urllib3
+python-pptx

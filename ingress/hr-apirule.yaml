@@ -1,0 +1,16 @@
+apiVersion: gateway.kyma-project.io/v2
+kind: APIRule
+metadata:
+  name: n8n-hr
+  namespace: n8n-hr
+spec:
+  hosts:
+    - hr.<YOUR_KYMA_DOMAIN>
+  service:
+    name: n8n-hr-main
+    port: 5678
+  gateway: kyma-system/kyma-gateway
+  rules:
+    - path: /*
+      methods: [GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS]
+      noAuth: true

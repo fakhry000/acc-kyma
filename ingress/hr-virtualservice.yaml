@@ -1,0 +1,32 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: n8n-hr
+  namespace: n8n-hr
+spec:
+  hosts:
+    - hr.<YOUR_KYMA_DOMAIN>
+  gateways:
+    - kyma-system/kyma-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /webhook-waiting
+        - uri:
+            prefix: /form-waiting
+        - uri:
+            prefix: /webhook
+        - uri:
+            prefix: /form
+        - uri:
+            prefix: /mcp
+      route:
+        - destination:
+            host: n8n-hr-webhook-processor
+            port:
+              number: 5678
+    - route:
+        - destination:
+            host: n8n-hr-main
+            port:
+              number: 5678

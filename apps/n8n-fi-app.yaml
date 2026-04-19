@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: n8n-fi
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+spec:
+  project: n8n-platform
+  sources:
+    - repoURL: https://github.com/n8n-io/acc-kyma.git
+      targetRevision: v1.2.0
+      path: charts/n8n
+      helm:
+        releaseName: n8n-fi
+        valueFiles:
+          - $values/config/common/n8n-common.yaml
+          - $values/config/common/platform-shared.yaml
+          - $values/config/instances/n8n-fi.yaml
+    - repoURL: https://github.com/fakhry000/acc-kyma.git
+      targetRevision: main
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: n8n-fi
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
