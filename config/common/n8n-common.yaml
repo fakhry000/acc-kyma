@@ -48,11 +48,6 @@ resources:
       cpu: "1"
       memory: 1Gi
 
-license:
-  enabled: true
-  existingSecret:
-    name: n8n-license-secret
-    key: license-key
 
 s3:
   enabled: false
