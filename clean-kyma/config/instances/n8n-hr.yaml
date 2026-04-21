@@ -15,7 +15,7 @@ database:
     rejectUnauthorized: false
 
 redis:
-  host: master.cm-148e4000-1165-4b3f-82f8-1596cb0f56b4.tg302k.euc1.cache.amazonaws.com
+  host: master.cm-781c7d4c-2cc9-4a82-b4c0-feead1715d13.tg302k.euc1.cache.amazonaws.com
   port: 6379
   prefix: n8n-hr
   tls: true
