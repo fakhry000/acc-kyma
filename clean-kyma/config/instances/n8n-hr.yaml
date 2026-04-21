@@ -9,7 +9,7 @@ database:
   port: 2504
   database: aTCIeNwDNZcG
   user: n8n_hr_user
-  schema: n8n-hr
+  schema: n8n_hr
   ssl:
     enabled: true
     rejectUnauthorized: false
