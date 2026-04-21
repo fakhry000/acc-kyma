@@ -10,6 +10,9 @@ database:
   database: aTCIeNwDNZcG
   user: n8n_fi_user
   schema: n8n-fi
+  ssl:
+    enabled: true
+    rejectUnauthorized: true
 
 redis:
   host: master.cm-148e4000-1165-4b3f-82f8-1596cb0f56b4.tg302k.euc1.cache.amazonaws.com
