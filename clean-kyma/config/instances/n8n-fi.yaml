@@ -10,6 +10,9 @@ database:
   database: aTCIeNwDNZcG
   user: n8n_fi_user
   schema: n8n-fi
+  ssl:
+  enabled: true
+  rejectUnauthorized: false
 
 redis:
   host: master.cm-148e4000-1165-4b3f-82f8-1596cb0f56b4.tg302k.euc1.cache.amazonaws.com
@@ -59,10 +62,6 @@ config:
         secretKeyRef:
           name: n8n-db-secret
           key: schema
-    - name: DB_POSTGRESDB_SSL_ENABLED
-      value: "true"
-    - name: DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED
-      value: "true"
 
     - name: QUEUE_BULL_REDIS_HOST
       valueFrom:
