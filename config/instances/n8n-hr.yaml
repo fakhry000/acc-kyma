@@ -1,0 +1,80 @@
+fullnameOverride: n8n-hr
+
+webhook:
+  enabled: true
+  url: https://hr.ea58fe1.kyma.ondemand.com
+
+database:
+  host: postgres-93fb7fe0-0a3b-4e6f-aa61-ec6e16af85ae.cwqnonr4r4q7.eu-central-1.rds.amazonaws.com
+  port: 2504
+  database: aTCIeNwDNZcG
+  user: n8n_hr_user
+  schema: n8n-hr
+
+redis:
+  host: master.cm-148e4000-1165-4b3f-82f8-1596cb0f56b4.tg302k.euc1.cache.amazonaws.com
+  port: 6379
+  prefix: n8n-hr
+
+taskRunners:
+  image:
+    repository: ghcr.io/fakhry000/n8n-hr-task-runner
+    tag: ""
+    pullPolicy: IfNotPresent
+
+config:
+  extraEnv:
+    - name: N8N_EDITOR_BASE_URL
+      value: https://hr.ea58fe1.kyma.ondemand.com
+    - name: WEBHOOK_URL
+      value: https://hr.ea58fe1.kyma.ondemand.com
+    - name: DB_POSTGRESDB_HOST
+      valueFrom:
+        secretKeyRef:
+          name: n8n-db-secret
+          key: hostname
+    - name: DB_POSTGRESDB_PORT
+      valueFrom:
+        secretKeyRef:
+          name: n8n-db-secret
+          key: port
+    - name: DB_POSTGRESDB_DATABASE
+      valueFrom:
+        secretKeyRef:
+          name: n8n-db-secret
+          key: dbname
+    - name: DB_POSTGRESDB_USER
+      valueFrom:
+        secretKeyRef:
+          name: n8n-db-secret
+          key: username
+    - name: DB_POSTGRESDB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: n8n-db-secret
+          key: password
+    - name: DB_POSTGRESDB_SCHEMA
+      valueFrom:
+        secretKeyRef:
+          name: n8n-db-secret
+          key: schema
+    - name: QUEUE_BULL_REDIS_HOST
+      valueFrom:
+        secretKeyRef:
+          name: n8n-redis-secret
+          key: host
+    - name: QUEUE_BULL_REDIS_PORT
+      valueFrom:
+        secretKeyRef:
+          name: n8n-redis-secret
+          key: port
+    - name: QUEUE_BULL_REDIS_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: n8n-redis-secret
+          key: password
+    - name: QUEUE_BULL_PREFIX
+      valueFrom:
+        secretKeyRef:
+          name: n8n-redis-secret
+          key: prefix

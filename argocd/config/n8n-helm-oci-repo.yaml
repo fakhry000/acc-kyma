@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: n8n-helm-oci-repo
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+type: Opaque
+stringData:
+  name: n8n-helm-oci
+  type: helm
+  url: ghcr.io/n8n-io/n8n-helm-chart
+  enableOCI: "true"

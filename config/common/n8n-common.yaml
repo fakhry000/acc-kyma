@@ -1,0 +1,189 @@
+image:
+  repository: docker.n8n.io/n8nio/n8n
+  tag: "2.16.2"
+  pullPolicy: IfNotPresent
+
+secretRefs:
+  existingSecret: n8n-app-secrets
+
+service:
+  type: ClusterIP
+  port: 5678
+  sessionAffinity:
+    enabled: true
+    timeoutSeconds: 10800
+
+replicaCount: 1
+
+multiMain:
+  enabled: true
+  replicas: 2
+
+queueMode:
+  enabled: true
+  workerReplicaCount: 2
+  workerConcurrency: 20
+
+webhookProcessor:
+  enabled: true
+  replicaCount: 1
+  disableProductionWebhooksOnMainProcess: true
+
+taskRunners:
+  enabled: true
+  mode: external
+  authToken:
+    existingSecret: n8n-task-runner-secret
+    existingSecretKey: N8N_RUNNERS_AUTH_TOKEN
+  broker:
+    listenAddress: "0.0.0.0"
+    port: 5679
+  launcher:
+    logLevel: info
+    autoShutdownTimeout: 60
+  nativePythonRunner: true
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: "1"
+      memory: 1Gi
+
+ingress:
+  enabled: false
+
+networkPolicy:
+  enabled: false
+
+persistence:
+  enabled: false
+
+database:
+  type: postgresdb
+  useExternal: true
+  host: ""
+  port: 5432
+  database: ""
+  schema: ""
+  user: ""
+  passwordSecret:
+    name: n8n-db-secret
+    key: password
+  ssl:
+    enabled: true
+    rejectUnauthorized: true
+
+redis:
+  enabled: true
+  useExternal: true
+  host: ""
+  port: 6379
+  passwordSecret:
+    name: n8n-redis-secret
+    key: password
+  prefix: ""
+  tls: true
+
+resources:
+  main:
+    requests:
+      cpu: 500m
+      memory: 1Gi
+    limits:
+      cpu: "2"
+      memory: 2Gi
+  worker:
+    requests:
+      cpu: 250m
+      memory: 1Gi
+    limits:
+      cpu: "2"
+      memory: 2Gi
+  webhookProcessor:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: "1"
+      memory: 1Gi
+
+webhook:
+  enabled: true
+  timeout: 120000
+
+executions:
+  timeout: 3600
+  timeoutMax: 604800
+  data:
+    saveOnError: "all"
+    saveOnSuccess: "all"
+    saveOnProgress: false
+    saveManualExecutions: true
+  pruning:
+    enabled: true
+    maxAge: 168
+    maxCount: 10000
+    hardDeleteBuffer: 1
+    hardDeleteInterval: 15
+    softDeleteInterval: 60
+  concurrency:
+    productionLimit: -1
+
+config:
+  timezone: Europe/Berlin
+  extraEnv:
+    - name: NODE_OPTIONS
+      value: --max-old-space-size=768
+    - name: GENERIC_TIMEZONE
+      value: Europe/Berlin
+    - name: OFFLOAD_MANUAL_EXECUTIONS_TO_WORKERS
+      value: "true"
+    - name: N8N_LOG_LEVEL
+      value: info
+    - name: N8N_PROXY_HOPS
+      value: "1"
+    - name: DB_PING_INTERVAL_SECONDS
+      value: "30"
+    - name: DB_POSTGRESDB_SSL_ENABLED
+      value: "true"
+    - name: DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED
+      value: "true"
+    - name: QUEUE_BULL_REDIS_TLS
+      value: "true"
+    - name: N8N_MULTI_MAIN_SETUP_ENABLED
+      value: "true"
+    - name: N8N_TEMPLATES_ENABLED
+      value: "true"
+    - name: N8N_SKIP_AUTH_ON_OAUTH_CALLBACK
+      value: "false"
+    - name: N8N_RESTRICT_FILE_ACCESS_TO
+      value: ~/.n8n-files
+    - name: N8N_DIAGNOSTICS_ENABLED
+      value: "false"
+    - name: N8N_PERSONALIZATION_ENABLED
+      value: "false"
+    - name: N8N_HIRING_BANNER_ENABLED
+      value: "false"
+    - name: N8N_DIAGNOSTICS_CONFIG_FRONTEND
+      value: "false"
+    - name: N8N_VERSION_NOTIFICATIONS_ENABLED
+      value: "false"
+    - name: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
+      value: "true"
+    - name: N8N_BLOCK_ENV_ACCESS_IN_NODE
+      value: "true"
+    - name: N8N_GIT_NODE_DISABLE_BARE_REPOS
+      value: "true"
+    - name: N8N_COMMUNITY_PACKAGES_ENABLED
+      value: "false"
+    - name: N8N_USER_MANAGEMENT_JWT_DURATION_HOURS
+      value: "1"
+    - name: N8N_RUNNERS_ENABLED
+      value: "true"
+    - name: N8N_RUNNERS_STDLIB_ALLOW
+      value: datetime,json,csv,re,os,math,base64,io
+    - name: N8N_RUNNERS_EXTERNAL_ALLOW
+      value: pandas,numpy,requests,openpyxl,xlrd,python-dateutil,pytz,pyyaml,lxml,beautifulsoup4,pypdf,pdfplumber,boto3,urllib3,pptx
+    - name: NODES_EXCLUDE
+      value: '[]'

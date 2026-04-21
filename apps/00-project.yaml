@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: n8n-platform
+  namespace: argocd
+spec:
+  description: Clean redeploy of n8n on SAP BTP Kyma with Argo CD GitOps
+  sourceRepos:
+    - https://github.com/fakhry000/acc-kyma.git
+    - ghcr.io/n8n-io/n8n-helm-chart
+  destinations:
+    - namespace: argocd
+      server: https://kubernetes.default.svc
+    - namespace: n8n-hr
+      server: https://kubernetes.default.svc
+    - namespace: n8n-fi
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
