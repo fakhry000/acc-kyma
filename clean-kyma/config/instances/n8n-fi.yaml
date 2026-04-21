@@ -8,7 +8,7 @@ database:
   host: postgres-93fb7fe0-0a3b-4e6f-aa61-ec6e16af85ae.cwqnonr4r4q7.eu-central-1.rds.amazonaws.com
   port: 2504
   database: aTCIeNwDNZcG
-  user: n8n_fi_user
+  user: 01f882302c9f
   schema: n8n_fi
   ssl:
     enabled: true
