@@ -62,7 +62,6 @@ config:
         secretKeyRef:
           name: n8n-db-secret
           key: schema
-
     - name: QUEUE_BULL_REDIS_HOST
       valueFrom:
         secretKeyRef:
