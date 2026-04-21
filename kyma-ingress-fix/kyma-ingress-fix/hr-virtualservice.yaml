@@ -1,11 +1,11 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: n8n-fi
-  namespace: n8n-fi
+  name: n8n-hr
+  namespace: n8n-hr
 spec:
   hosts:
-    - fi.ea58fe1.kyma.ondemand.com
+    - hr-vs.ea58fe1.kyma.ondemand.com
   gateways:
     - kyma-system/kyma-gateway
   http:
@@ -22,11 +22,11 @@ spec:
             prefix: /mcp
       route:
         - destination:
-            host: n8n-fi-webhook-processor
+            host: n8n-hr-webhook-processor.n8n-hr.svc.cluster.local
             port:
               number: 5678
     - route:
         - destination:
-            host: n8n-fi-main
+            host: n8n-hr-main.n8n-hr.svc.cluster.local
             port:
               number: 5678
