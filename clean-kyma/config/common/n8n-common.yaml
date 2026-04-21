@@ -59,20 +59,6 @@ networkPolicy:
 persistence:
   enabled: false
 
-database:
-  type: postgresdb
-  useExternal: true
-  host: ""
-  port: 5432
-  database: ""
-  schema: ""
-  user: ""
-  passwordSecret:
-    name: n8n-db-secret
-    key: password
-  ssl:
-    enabled: true
-    rejectUnauthorized: true
 
 redis:
   enabled: true
