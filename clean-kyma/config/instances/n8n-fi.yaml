@@ -11,13 +11,14 @@ database:
   user: n8n_fi_user
   schema: n8n-fi
   ssl:
-  enabled: true
-  rejectUnauthorized: false
+    enabled: true
+    rejectUnauthorized: false
 
 redis:
   host: master.cm-148e4000-1165-4b3f-82f8-1596cb0f56b4.tg302k.euc1.cache.amazonaws.com
   port: 6379
   prefix: n8n-fi
+  tls: true
 
 taskRunners:
   image:
@@ -31,54 +32,3 @@ config:
       value: https://fi.ea58fe1.kyma.ondemand.com
     - name: WEBHOOK_URL
       value: https://fi.ea58fe1.kyma.ondemand.com
-
-    - name: DB_POSTGRESDB_HOST
-      valueFrom:
-        secretKeyRef:
-          name: n8n-db-secret
-          key: hostname
-    - name: DB_POSTGRESDB_PORT
-      valueFrom:
-        secretKeyRef:
-          name: n8n-db-secret
-          key: port
-    - name: DB_POSTGRESDB_DATABASE
-      valueFrom:
-        secretKeyRef:
-          name: n8n-db-secret
-          key: dbname
-    - name: DB_POSTGRESDB_USER
-      valueFrom:
-        secretKeyRef:
-          name: n8n-db-secret
-          key: username
-    - name: DB_POSTGRESDB_PASSWORD
-      valueFrom:
-        secretKeyRef:
-          name: n8n-db-secret
-          key: password
-    - name: DB_POSTGRESDB_SCHEMA
-      valueFrom:
-        secretKeyRef:
-          name: n8n-db-secret
-          key: schema
-    - name: QUEUE_BULL_REDIS_HOST
-      valueFrom:
-        secretKeyRef:
-          name: n8n-redis-secret
-          key: host
-    - name: QUEUE_BULL_REDIS_PORT
-      valueFrom:
-        secretKeyRef:
-          name: n8n-redis-secret
-          key: port
-    - name: QUEUE_BULL_REDIS_PASSWORD
-      valueFrom:
-        secretKeyRef:
-          name: n8n-redis-secret
-          key: password
-    - name: QUEUE_BULL_PREFIX
-      valueFrom:
-        secretKeyRef:
-          name: n8n-redis-secret
-          key: prefix
