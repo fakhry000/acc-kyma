@@ -19,7 +19,7 @@ redis:
 taskRunners:
   image:
     repository: ghcr.io/fakhry000/n8n-hr-task-runner
-    tag: ""
+    tag: "2.15.0"
     pullPolicy: IfNotPresent
 
 config:
@@ -28,6 +28,7 @@ config:
       value: https://hr.ea58fe1.kyma.ondemand.com
     - name: WEBHOOK_URL
       value: https://hr.ea58fe1.kyma.ondemand.com
+
     - name: DB_POSTGRESDB_HOST
       valueFrom:
         secretKeyRef:
@@ -58,6 +59,7 @@ config:
         secretKeyRef:
           name: n8n-db-secret
           key: schema
+
     - name: QUEUE_BULL_REDIS_HOST
       valueFrom:
         secretKeyRef:
