@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: n8n-fi-bootstrap-note
-  namespace: n8n-fi
-data:
-  note: "Placeholder config objects for n8n-fi. Replace placeholder values before production sync."
