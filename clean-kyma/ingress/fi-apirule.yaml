@@ -1,0 +1,23 @@
+apiVersion: gateway.kyma-project.io/v2
+kind: APIRule
+metadata:
+  name: n8n-fi
+  namespace: n8n-fi
+spec:
+  hosts:
+    - fi.ea58fe1.kyma.ondemand.com
+  service:
+    name: n8n-fi-main
+    port: 5678
+  gateway: kyma-system/kyma-gateway
+  rules:
+    - path: /*
+      methods:
+        - GET
+        - POST
+        - PUT
+        - PATCH
+        - DELETE
+        - HEAD
+        - OPTIONS
+      noAuth: true
