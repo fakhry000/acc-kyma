@@ -5,7 +5,7 @@ metadata:
   namespace: n8n-hr
 spec:
   hosts:
-    - hr.ea58fe1.kyma.ondemand.com
+    - accenture-sap-ai.ea58fe1.kyma.ondemand.com
   service:
     name: n8n-hr-main
     port: 5678
